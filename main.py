@@ -74,10 +74,40 @@ def test_is_superprime():
 test_is_superprime()
 
 
+def get_largest_prime_below(n):
+    '''
+    -determina ultimul numar prim mai mic decat numarul n dat
+    Input
+    -parametru n(de tip intreg)
+    Output
+    -nr_prim:ultimul numar prim mai mic decat numarul n dat
+    '''
+    nr_prim=n-1
+    ok=False
+    if n<=2:
+        return None
+    while not ok:
+        if verificare_prim(nr_prim):
+            ok=True
+            break
+        nr_prim=nr_prim-1
+    return nr_prim
+
+
+def test_get_largest_prime_below():
+    assert get_largest_prime_below(25) == 23
+    assert get_largest_prime_below(18) == 17
+    assert get_largest_prime_below(36) == 31
+    assert get_largest_prime_below(135) == 131
+    assert get_largest_prime_below(76) == 73
+
+test_get_largest_prime_below()
+
 def main():
     while True:
         print("1.Determina daca un numar dat este palindrom.")
         print("2.Determina daca un numar dat este superprim.")
+        print("3.Determina ultimul numar prim mai mic decat un numar dat.")
         print("x.Iesire")
         optiune=input("Dati optiunea:")
         if optiune=="1":
@@ -92,7 +122,13 @@ def main():
                 print("Numarul dat este superprim.")
             else:
                 print("Numarul dat nu este superprim.")
-
+        elif optiune=="3":
+            numar = int(input("Dati numar:"))
+            nrprim=get_largest_prime_below(numar)
+            if nrprim:
+                print("Ultimul numar prim mai mic decat numarul dat este ",nrprim)
+            else:
+                print("Nu exista!")
         elif optiune=="x":
             print("Meniul se va inchide.")
             break
